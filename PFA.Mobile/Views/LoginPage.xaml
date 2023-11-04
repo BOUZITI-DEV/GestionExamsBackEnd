@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PFA.Mobile.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:PFA.Mobile.ViewModels">
+    <ContentPage.BindingContext>
+        <viewmodels:LoginViewModel />
+    </ContentPage.BindingContext>
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="20"
+        VerticalOptions="CenterAndExpand">
+        <Entry
+            FontAttributes="Bold"
+            FontSize="20"
+            Keyboard="Email"
+            Placeholder="Login"
+            Text="{Binding SurveillantLogin}" />
+        <Entry
+            FontAttributes="Bold"
+            FontSize="20"
+            Placeholder="Password"
+            Text="{Binding SurveillantPassword}" />
+        <Button
+            Command="{Binding LoginCommand}"
+            FontAttributes="Bold"
+            FontSize="20"
+            IsEnabled="{Binding IsLoginEnabled}"
+            Text="Login" />
+        <ActivityIndicator
+            IsRunning="{Binding IsBussy}"
+            IsVisible="{Binding IsBussy}"
+            VerticalOptions="End" />
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PFA.Mobile.Views.HomePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:PFA.Mobile.Services"
+    xmlns:viewmodels="clr-namespace:PFA.Mobile.ViewModels"
+    x:DataType="{x:Type viewmodels:HomePageViewModel}">
+    <Grid Padding="20" RowDefinitions="100,*,80">
+        <Label
+            FontSize="20"
+            Text="Selectionner un examen "
+            TextColor="Gray"
+            VerticalTextAlignment="Center" />
+        <CollectionView
+            Grid.Row="1"
+            ItemsSource="{Binding Exams}"
+            SelectedItem="{Binding SelectedExam}"
+            SelectionMode="Single"
+            VerticalScrollBarVisibility="Never">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type models:Exam}">
+                    <Border HeightRequest="120" StrokeShape="RoundRectangle 5">
+                        <Grid
+                            Margin="4"
+                            RowDefinitions="*,*,*,*"
+                            VerticalOptions="Center">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="{Binding Label, StringFormat='Label : {0}'}" />
+                            <Label
+                                Grid.Row="1"
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="{Binding DateDebut, StringFormat='Date Debut {0:dd}/{0:MM}/{0:yyyy}'}" />
+                            <Label
+                                Grid.Row="2"
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="{Binding DateDebut, StringFormat='Heure Debut : {0:HH}:{0:mm}'}" />
+                            <Label
+                                Grid.Row="3"
+                                FontAttributes="Bold"
+                                FontSize="18"
+                                Text="{Binding DateDebut, StringFormat='Heure Fin       : {0:HH}:{0:mm}'}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <HorizontalStackLayout
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            Spacing="20"
+            VerticalOptions="Center">
+            <Button
+                BackgroundColor="red"
+                Command="{Binding CancelCommand}"
+                FontAttributes="Bold"
+                FontSize="20"
+                Text="Cancel" />
+            <Button
+                BackgroundColor="Green"
+                Command="{Binding ContinueCommand}"
+                FontAttributes="Bold"
+                FontSize="20"
+                IsEnabled="{Binding IsContinueEnabled}"
+                Text="Continue" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PFA.Mobile.Views.EtudiantsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:PFA.Mobile.Services"
+    xmlns:viewmodels="clr-namespace:PFA.Mobile.ViewModels"
+    x:DataType="{x:Type viewmodels:ExamDetailsViewModel}">
+    <Grid Padding="15" RowDefinitions="100,*,50">
+        <Label
+            FontAttributes="Bold"
+            FontSize="22"
+            HorizontalTextAlignment="Center"
+            Text="Liste De Presence"
+            VerticalTextAlignment="Center" />
+        <CollectionView
+            x:Name="EtudiantsList"
+            Grid.Row="1"
+            ItemsSource="{Binding ExamEtudiants}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type models:ExamEtudiant}">
+                    <Border StrokeShape="RoundRectangle 10">
+                        <Grid ColumnDefinitions="*,50" VerticalOptions="Center">
+                            <Label
+                                Margin="5,0,0,0"
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                VerticalTextAlignment="Center">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="Etudiant.Nom" />
+                                        <Binding Path="Etudiant.Prenom" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <CheckBox
+                                Grid.Column="1"
+                                IsChecked="{Binding IsPresent}"
+                                IsEnabled="False"
+                                ScaleX="1.2"
+                                ScaleY="1.2" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button
+            Grid.Row="2"
+            Command="{Binding SaveExamDataCommand}"
+            Text="Sauvegarder la liste" />
+        <ActivityIndicator
+            Grid.RowSpan="3"
+            IsRunning="{Binding IsBussy}"
+            IsVisible="{Binding IsBussy}" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="PFA.Mobile.Views.ExamDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+    xmlns:viewmodels="clr-namespace:PFA.Mobile.ViewModels"
+    x:DataType="{x:Type viewmodels:ExamDetailsViewModel}">
+    <Grid RowDefinitions="60,*">
+        <Button
+            x:Name="VerifyWithNumApp"
+            Margin="5"
+            Clicked="VerifyWithNumApp_Clicked"
+            FontAttributes="Bold"
+            FontSize="20"
+            Text="Verifier Avec Numero App" />
+        <cv:CameraView
+            x:Name="cameraView"
+            Grid.Row="1"
+            BarCodeDetectionEnabled="True"
+            BarcodeDetected="cameraView_BarcodeDetected"
+            CamerasLoaded="cameraView_Loaded"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+    </Grid>
+
+</ContentPage>
